@@ -7,14 +7,18 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 Modal.setAppElement('#root'); // Avoid screen reader warnings
 
 const ViewItems = () => {
+    const [loading, setLoading] = useState(true);
   const [items, setItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     axios.get("https://itemlist-9a1t.onrender.com/api/items")
-      .then(res => setItems(res.data))
-      .catch(err => console.error("Error fetching items:", err));
+      .then(res =>{ setItems(res.data)
+       setLoading(false)
+  })
+      .catch(err =>{ console.error("Error fetching items:", err)
+        setLoading(false) });
   }, []);
 
   const openModal = (item) => {
@@ -30,7 +34,9 @@ const ViewItems = () => {
   return (
     <div className="p-6 h-[200vh]">
       <h1 className="text-3xl font-bold mb-4">All Items</h1>
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    {
+        loading ? (<p>Loading ...</p>) :
+         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {items.map((item) => (
           <div
             key={item._id}
@@ -40,12 +46,16 @@ const ViewItems = () => {
             <img
               src={item.cover}
               alt={item.name}
+                loading="lazy"
               className="h-60 w-full object-cover rounded mb-3"
             />
             <h2 className="text-lg font-semibold text-center">{item.name}</h2>
           </div>
         ))}
       </div>
+    }
+    
+   
 
       {selectedItem && (
        <Modal
@@ -66,6 +76,7 @@ overlayClassName="fixed inset-0 backdrop-blur-sm bg-black/60 flex justify-center
       <img
         src={selectedItem.cover}
         alt="Cover"
+        loading="lazy"
         className="max-h-[400px] w-full object-contain"
       />
     </div>
@@ -74,6 +85,7 @@ overlayClassName="fixed inset-0 backdrop-blur-sm bg-black/60 flex justify-center
         <img
           src={img}
           alt={`Additional ${i}`}
+          loading="lazy"
           className="max-h-[400px] w-full object-contain"
         />
       </div>
