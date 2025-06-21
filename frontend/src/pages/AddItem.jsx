@@ -59,7 +59,7 @@ const imagesRef = useRef(null);
   };
 
   return (
-    <div className="max-w-xl mx-auto p-5 bg-white shadow-md rounded-lg">
+    <div className="max-w-xl mx-auto p-5 mt-10  rounded-lg">
       <h2 className="text-2xl font-semibold mb-6">Add New Item</h2>
       <form onSubmit={handleSubmit} className="space-y-4" encType="multipart/form-data">
         
