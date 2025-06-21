@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import axios from 'axios';
 
 const AddItem = () => {
+const coverRef = useRef(null);
+const imagesRef = useRef(null);
+
   const [formData, setFormData] = useState({
     name: '',
     type: '',
@@ -47,6 +50,8 @@ const AddItem = () => {
           cover: null,
           images: []
         });
+          if (coverRef.current) coverRef.current.value = '';
+  if (imagesRef.current) imagesRef.current.value = '';
       }
     } catch (err) {
       console.error('Error:', err.message);
@@ -110,6 +115,7 @@ const AddItem = () => {
             onChange={handleFileChange}
             className="border p-2 w-full rounded"
             required
+            ref={coverRef}
           />
         </div>
 
@@ -123,6 +129,7 @@ const AddItem = () => {
             onChange={handleFileChange}
             className="border p-2 w-full rounded"
             required
+            ref={imagesRef}
           />
         </div>
 
