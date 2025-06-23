@@ -46,7 +46,7 @@ const ViewItems = () => {
             <img
               src={item.cover}
               alt={item.name}
-                loading="lazy"
+               
               className="h-60 w-full object-cover rounded mb-3"
             />
             <h2 className="text-lg font-semibold text-center">{item.name}</h2>
@@ -76,7 +76,7 @@ overlayClassName="fixed inset-0 backdrop-blur-sm bg-black/60 flex justify-center
       <img
         src={selectedItem.cover}
         alt="Cover"
-        loading="lazy"
+       
         className="max-h-[400px] w-full object-contain"
       />
     </div>
@@ -85,7 +85,7 @@ overlayClassName="fixed inset-0 backdrop-blur-sm bg-black/60 flex justify-center
         <img
           src={img}
           alt={`Additional ${i}`}
-          loading="lazy"
+      
           className="max-h-[400px] w-full object-contain"
         />
       </div>
